@@ -2,6 +2,8 @@ import { useState } from "react";
 import { Button } from "./Button";
 
 export const Calculator = () => {
+  const operators = ["%", "/", "*", "-", "+"];
+
   const buttons = [
     {
       className: "ac",
@@ -81,37 +83,69 @@ export const Calculator = () => {
     },
   ];
 
-  const [displayValue, setDisplayValue] = useState(0);
-
-  const operators = ["+", "-", "%", "*", "/", "."];
+  const [strToDisplay, setStrToDisplay] = useState("");
+  const [lastOperator, setLastOperator] = useState("");
+  const [isPrank, setIsPrank] = useState(false);
 
   const handleButtonClick = (val) => {
-    if (val === "AC") {
-      return setDisplayValue(0);
+    isPrank && setIsPrank(false);
+    if (val === "C") {
+      return setStrToDisplay(strToDisplay.slice(0, -1));
     }
 
-    if (val === "←") {
-      return setDisplayValue(displayValue.slice(0, -1));
-      //   console.log("inside div", stringToDisplay);
+    if (val === "AC") {
+      return setStrToDisplay("");
     }
 
     if (val === "=") {
-      const lastChar = setDisplayValue(displayValue.slice(-1));
+      const lastChar = strToDisplay[strToDisplay.length - 1];
+      let temStr = strToDisplay;
+      if (operators.includes(lastChar)) {
+        temStr = strToDisplay.slice(0, -1);
+      }
 
-      console.log(lastChar);
+      const total = eval(temStr);
+      return setStrToDisplay(total.toString());
+    }
+
+    if (operators.includes(val)) {
+      if (!strToDisplay) {
+        return;
+      }
+
+      let temStr = strToDisplay;
+      const lastChar = strToDisplay[strToDisplay.length - 1];
 
       if (operators.includes(lastChar)) {
-        setDisplayValue = setDisplayValue(displayValue.slice(0, -1));
+        temStr = strToDisplay.slice(0, -1);
+      }
+      setStrToDisplay(temStr + val);
+      setLastOperator(val);
+      return;
+    }
+
+    if (val === ".") {
+      if (lastOperator) {
+        const operatorIndex = strToDisplay.lastIndexOf(lastOperator);
+
+        const numbeAfterLastOperator = strToDisplay.slice(operatorIndex);
+
+        if (numbeAfterLastOperator.includes(".")) {
+          return;
+        }
+      }
+
+      if (!lastOperator && strToDisplay.includes(".")) {
+        return;
       }
     }
 
-    setDisplayValue(displayValue + val);
+    setStrToDisplay(strToDisplay + val);
   };
-
   return (
     <div className="wrapper">
       <div className="calculator">
-        <div className="display">{displayValue}</div>
+        <div className="display">{strToDisplay}</div>
         {buttons.map((item, index) => (
           <Button
             key={index}
