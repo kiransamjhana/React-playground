@@ -1,8 +1,13 @@
+export const Button = ({ className, label, handleButtonClick }) => {
+  //new file added in the button it is just testeing
+  //new ifle testeted
 
-export const Button = ({className, label, handleButtonClick}) => {
-    return  <div 
-    className={"btn btn-" + className} 
-    onClick={()=> handleButtonClick(label)}
+  return (
+    <div
+      className={"btn btn-" + className}
+      onClick={() => handleButtonClick(label)}
     >
-        {label}</div>
-}
+      {label}
+    </div>
+  );
+};
