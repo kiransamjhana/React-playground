@@ -130,6 +130,7 @@ export const Calculator = () => {
 
         const numbeAfterLastOperator = strToDisplay.slice(operatorIndex);
 
+        // nw changes made in this file to peopoel wllajgit
         if (numbeAfterLastOperator.includes(".")) {
           return;
         }
