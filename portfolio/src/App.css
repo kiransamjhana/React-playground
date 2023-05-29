@@ -1,0 +1,53 @@
+.hero {
+  min-height: 60vh;
+  background: linear-gradient(90deg, #e7db76 0.25%, #5dcb36 100%);
+}
+
+/* title */
+.title {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: bolder;
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+}
+
+.title span {
+  padding: 0 1rem;
+  border-bottom: 0.4rem solid yellowgreen;
+}
+
+/* icons */
+.icons {
+  display: flex;
+  font-size: 2rem;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.icons i {
+  font-size: 5rem;
+}
+
+.icons div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 2rem;
+}
+
+/* Project section */
+.projects {
+  background: rgba(231, 213, 118, 0.41);
+}
+
+/* contact me section */
+.contact {
+  background: rgba(93, 203, 54, 0.62);
+}
+
+/* up button  */
+.goup {
+  position: fixed;
+  bottom: 125px;
+  right: 20px;
+}
